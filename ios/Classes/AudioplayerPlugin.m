@@ -87,7 +87,20 @@ FlutterMethodChannel *_channel;
             NSLog(@"Error setting speaker");
             
         }
-	// End fix
+    // End fix
+
+  // Get controls in the locks-screen
+
+  [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
+
+  MPRemoteCommandCenter *remoteCommandCenter = [MPRemoteCommandCenter sharedCommandCenter];
+
+  [remoteCommandCenter.playCommand addTargetWithHandler:^MPRemoteCommandHandlerStatus (MPRemoteCommandEvent *event) {
+      //....
+  }];
+
+  // End locks-screen stuffs
+
 
   if (![url isEqualToString:lastUrl]) {
     [playerItem removeObserver:self
@@ -205,5 +218,22 @@ FlutterMethodChannel *_channel;
   }
   observers = nil;
 }
+
+
+//- (void)applicationDidEnterBackground:(UIApplication *)application
+//{
+//  [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
+//
+//  MPRemoteCommandCenter *remoteCommandCenter = [MPRemoteCommandCenter sharedCommandCenter];
+//
+//  [remoteCommandCenter.playCommand addTargetWithHandler:^MPRemoteCommandHandlerStatus (MPRemoteCommandEvent *event) {
+//      //....
+//  }];
+//}
+//
+//- (void)applicationDidBecomeActive:(UIApplication *)application
+//{
+//  [[UIApplication sharedApplication] endReceivingRemoteControlEvents];
+//}
 
 @end
