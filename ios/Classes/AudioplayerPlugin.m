@@ -2,6 +2,7 @@
 #import <UIKit/UIKit.h>
 #import <AVKit/AVKit.h>
 #import <AVFoundation/AVFoundation.h>
+#import <MediaPlayer/MediaPlayer.h>
 
 static NSString *const CHANNEL_NAME = @"bz.rxla.flutter/audio";
 static FlutterMethodChannel *channel;
@@ -93,11 +94,11 @@ FlutterMethodChannel *_channel;
 
   [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
 
-  MPRemoteCommandCenter *remoteCommandCenter = [MPRemoteCommandCenter sharedCommandCenter];
-
-  [remoteCommandCenter.playCommand addTargetWithHandler:^MPRemoteCommandHandlerStatus (MPRemoteCommandEvent *event) {
-      //....
-  }];
+  // MPRemoteCommandCenter *remoteCommandCenter = [MPRemoteCommandCenter sharedCommandCenter];
+ //
+ //  [remoteCommandCenter.playCommand addTargetWithHandler:^MPRemoteCommandHandlerStatus (MPRemoteCommandEvent *event) {
+ //      //....
+ //  }];
 
   // End locks-screen stuffs
 
