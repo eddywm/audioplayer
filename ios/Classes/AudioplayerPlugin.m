@@ -34,7 +34,17 @@ FlutterMethodChannel *_channel;
   AudioplayerPlugin* instance = [[AudioplayerPlugin alloc] init];
   [registrar addMethodCallDelegate:instance channel:channel];
   _channel = channel;
+    
+    [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
+    NSError *error = nil;
+    if (![[AVAudioSession sharedInstance] setActive:YES error:&error]) {
+        NSLog(@"Failed to get an active session");
+    }
+  
 }
+
+
+
 
 - (void)handleMethodCall:(FlutterMethodCall*)call result:(FlutterResult)result {
   typedef void (^CaseBlock)();
@@ -78,7 +88,7 @@ FlutterMethodChannel *_channel;
 }
 
 - (void)play:(NSString*)url isLocal:(int)isLocal {
-  
+
   	// Fix for iOS Speaker Output
         NSError *error = nil;
         BOOL success = [[AVAudioSession sharedInstance]
@@ -86,19 +96,24 @@ FlutterMethodChannel *_channel;
                         error:&error];
         if (!success) {
             NSLog(@"Error setting speaker");
-            
+
         }
     // End fix
 
   // Get controls in the locks-screen
 
-  [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
 
-  // MPRemoteCommandCenter *remoteCommandCenter = [MPRemoteCommandCenter sharedCommandCenter];
- //
- //  [remoteCommandCenter.playCommand addTargetWithHandler:^MPRemoteCommandHandlerStatus (MPRemoteCommandEvent *event) {
- //      //....
- //  }];
+
+    NSDictionary *info = @{
+                           MPMediaItemPropertyArtist: @"Arttist Test",
+                           MPMediaItemPropertyAlbumTitle: @"Album Test",
+                           MPMediaItemPropertyTitle:  @"Property Test",
+                           MPNowPlayingInfoPropertyPlaybackRate :@1.0f };
+
+    NSLog(@"Begin receiving events");
+
+    [[MPNowPlayingInfoCenter defaultCenter]setNowPlayingInfo:info];
+
 
   // End locks-screen stuffs
 
@@ -221,20 +236,6 @@ FlutterMethodChannel *_channel;
 }
 
 
-//- (void)applicationDidEnterBackground:(UIApplication *)application
-//{
-//  [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
-//
-//  MPRemoteCommandCenter *remoteCommandCenter = [MPRemoteCommandCenter sharedCommandCenter];
-//
-//  [remoteCommandCenter.playCommand addTargetWithHandler:^MPRemoteCommandHandlerStatus (MPRemoteCommandEvent *event) {
-//      //....
-//  }];
-//}
-//
-//- (void)applicationDidBecomeActive:(UIApplication *)application
-//{
-//  [[UIApplication sharedApplication] endReceivingRemoteControlEvents];
-//}
+
 
 @end

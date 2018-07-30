@@ -9,8 +9,8 @@ import 'package:path_provider/path_provider.dart';
 
 typedef void OnError(Exception exception);
 
-const kUrl = "http://www.rxlabz.com/labz/audio2.mp3";
-const kUrl2 = "http://www.rxlabz.com/labz/audio.mp3";
+const kUrl = "https://raw.githubusercontent.com/eddywm/rfh/master/prancer_rap.mp3";
+const kUrl2 = "https://raw.githubusercontent.com/eddywm/rfh/master/prancer_rap.mp3";
 
 void main() {
   runApp(new MaterialApp(home: new Scaffold(body: new AudioApp())));
@@ -54,9 +54,9 @@ class _AudioAppState extends State<AudioApp> {
 
   @override
   void dispose() {
-    _positionSubscription.cancel();
-    _audioPlayerStateSubscription.cancel();
-    audioPlayer.stop();
+    //_positionSubscription.cancel();
+    //_audioPlayerStateSubscription.cancel();
+    //audioPlayer.stop();
     super.dispose();
   }
 
