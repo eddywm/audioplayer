@@ -2,4 +2,5 @@
 
 
 @interface AudioplayerPlugin : NSObject<FlutterPlugin>
++ (AudioplayerPlugin *) sharedObject;
 @end

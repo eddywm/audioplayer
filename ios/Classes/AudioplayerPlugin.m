@@ -235,6 +235,16 @@ FlutterMethodChannel *_channel;
   observers = nil;
 }
 
++ (AudioplayerPlugin *) sharedObject
+{
+    static dispatch_once_t once;
+    static AudioplayerPlugin *sharedObject;
+    dispatch_once(&once, ^{
+        sharedObject = [[self alloc] init];
+    });
+    return sharedObject;
+}
+
 
 
 
