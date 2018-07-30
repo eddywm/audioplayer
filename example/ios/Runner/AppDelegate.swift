@@ -16,18 +16,25 @@ import audioplayer
     
 
     override func remoteControlReceived(with event: UIEvent?) {
+        let audioPlugin = AudioplayerPlugin.sharedInstance();
         let rc = event!.subtype
         print("Event \(rc.rawValue)")
         if event?.type == UIEventType.remoteControl {
             if event?.subtype == UIEventSubtype.remoteControlPlay {
-                print("received remote play")
+                print("received remote control play")
+                
+                 audioPlugin?.toggLePlayer();
                 
             } else if event?.subtype == UIEventSubtype.remoteControlPause {
-                print("received remote pause")
+                print("received remote control pause")
+                
+                audioPlugin?.toggLePlayer();
                 
                 
             } else if event?.subtype == UIEventSubtype.remoteControlTogglePlayPause {
-                print("received toggle")
+                print("received control toggle")
+                
+                 audioPlugin?.toggLePlayer();
                 
             }
         }

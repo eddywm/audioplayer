@@ -245,5 +245,18 @@ static id _instance;
 }
 
 
+- (void)toggLePlayer {
+   
+    if ( isPlaying ) {
+        [player pause];
+        isPlaying = false;
+        [_channel invokeMethod:@"audio.onPause" arguments:nil];
+    } else {
+        [player play];
+        isPlaying = true;
+    }
+}
+
+
 
 @end

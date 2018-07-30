@@ -3,4 +3,5 @@
 
 @interface AudioplayerPlugin : NSObject<FlutterPlugin>
 + (instancetype)sharedInstance;
+- (void)toggLePlayer;
 @end
