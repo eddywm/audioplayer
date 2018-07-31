@@ -9,8 +9,10 @@ import 'package:path_provider/path_provider.dart';
 
 typedef void OnError(Exception exception);
 
-const kUrl = "https://raw.githubusercontent.com/eddywm/rfh/master/prancer_rap.mp3";
-const kUrl2 = "https://raw.githubusercontent.com/eddywm/rfh/master/prancer_rap.mp3";
+const kUrl =
+    "https://raw.githubusercontent.com/eddywm/rfh/master/prancer_rap.mp3";
+const kUrl2 =
+    "https://raw.githubusercontent.com/eddywm/rfh/master/prancer_rap.mp3";
 
 void main() {
   runApp(new MaterialApp(home: new Scaffold(body: new AudioApp())));
@@ -34,10 +36,12 @@ class _AudioAppState extends State<AudioApp> {
   PlayerState playerState = PlayerState.stopped;
 
   get isPlaying => playerState == PlayerState.playing;
+
   get isPaused => playerState == PlayerState.paused;
 
   get durationText =>
       duration != null ? duration.toString().split('.').first : '';
+
   get positionText =>
       position != null ? position.toString().split('.').first : '';
 
@@ -62,12 +66,18 @@ class _AudioAppState extends State<AudioApp> {
 
   void initAudioPlayer() {
     audioPlayer = new AudioPlayer();
-    _positionSubscription = audioPlayer.onAudioPositionChanged.listen(
-      (p) => setState(() => position = p)
-    );
-    _audioPlayerStateSubscription = audioPlayer.onPlayerStateChanged.listen((s) {
+    _positionSubscription = audioPlayer.onAudioPositionChanged
+        .listen((p) => setState(() => position = p));
+    _audioPlayerStateSubscription =
+        audioPlayer.onPlayerStateChanged.listen((s) {
       if (s == AudioPlayerState.PLAYING) {
         setState(() => duration = audioPlayer.duration);
+      } else if (s == AudioPlayerState.PAUSED) {
+        //
+        setState(() {
+          playerState = PlayerState.paused;
+        });
+        print("Player state changed to Paused");
       } else if (s == AudioPlayerState.STOPPED) {
         onComplete();
         setState(() {

@@ -36,9 +36,25 @@ import audioplayer
                 
                  audioPlugin?.toggLePlayer();
                 
-            }
+                
+            
+        } else if event?.subtype == UIEventSubtype.remoteControlNextTrack {
+            print("received control next track")
+                
+                
+                audioPlugin?.nextTrack();
+           
+            
+        
+            
+        } else if event?.subtype == UIEventSubtype.remoteControlPreviousTrack {
+            print("received control previous track")
+            
+            audioPlugin?.prevTrack();
+            
         }
     }
+}
     
     override var canBecomeFirstResponder: Bool {
         

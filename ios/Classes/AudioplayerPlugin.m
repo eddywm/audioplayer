@@ -105,9 +105,9 @@ FlutterMethodChannel *_channel;
 
 
     NSDictionary *info = @{
-                           MPMediaItemPropertyArtist: @"Arttist Test",
-                           MPMediaItemPropertyAlbumTitle: @"Album Test",
-                           MPMediaItemPropertyTitle:  @"Property Test",
+                           MPMediaItemPropertyArtist: @"Marcus Middleton",
+                           MPMediaItemPropertyAlbumTitle: @"Iced Paradise",
+                           MPMediaItemPropertyTitle:  @"Still Alive",
                            MPNowPlayingInfoPropertyPlaybackRate :@1.0f };
 
     NSLog(@"Begin receiving events");
@@ -251,10 +251,20 @@ static id _instance;
         [player pause];
         isPlaying = false;
         [_channel invokeMethod:@"audio.onPause" arguments:nil];
+        [_channel invokeMethod:@"audio.remoteOnPause" arguments:nil];
     } else {
         [player play];
         isPlaying = true;
+        [_channel invokeMethod:@"audio.remoteOnPlay" arguments:nil];
     }
+}
+
+- (void)nextTrack {
+    [_channel invokeMethod:@"audio.remoteOnNextTrack" arguments:nil];
+}
+
+- (void)prevTrack {
+    [_channel invokeMethod:@"audio.remoteOnPrevTrack" arguments:nil];
 }
 
 
